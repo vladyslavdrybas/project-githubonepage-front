@@ -13,38 +13,23 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { alpha } from '@mui/material';
 
-import ForgotPassword from '@/components/ForgotPassword';
 import { GoogleIcon, FacebookIcon, SitemarkIcon } from '@/components/CustomIcons';
 
-const SignIn: React.FunctionComponent = () => {
-
-
+const SignUp: React.FunctionComponent = () => {
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  const [nameError, setNameError] = React.useState(false);
+  const [nameErrorMessage, setNameErrorMessage] = React.useState('');
+  const [lastNameError, setLastNameError] = React.useState(false);
+  const [lastNameErrorMessage, setLastNameErrorMessage] = React.useState('');
 
   const validateInputs = () => {
     const email = document.getElementById('email') as HTMLInputElement;
     const password = document.getElementById('password') as HTMLInputElement;
+    const name = document.getElementById('name') as HTMLInputElement;
+    const lastName = document.getElementById('lastName') as HTMLInputElement;
 
     let isValid = true;
 
@@ -66,7 +51,36 @@ const SignIn: React.FunctionComponent = () => {
       setPasswordErrorMessage('');
     }
 
+    if (!name.value || name.value.length < 1) {
+      setNameError(true);
+      setNameErrorMessage('Name is required.');
+      isValid = false;
+    } else {
+      setNameError(false);
+      setNameErrorMessage('');
+    }
+
+    if (!lastName.value || lastName.value.length < 1) {
+      setLastNameError(true);
+      setLastNameErrorMessage('Name is required.');
+      isValid = false;
+    } else {
+      setLastNameError(false);
+      setLastNameErrorMessage('');
+    }
+
     return isValid;
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      name: data.get('name'),
+      lastName: data.get('lastName'),
+      email: data.get('email'),
+      password: data.get('password'),
+    });
   };
 
   return (
@@ -109,111 +123,115 @@ const SignIn: React.FunctionComponent = () => {
             variant="h4"
             sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
           >
-            Sign in
+            Sign up
           </Typography>
           <Box
             component="form"
             onSubmit={handleSubmit}
-            noValidate
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%',
-              gap: 2,
-            }}
+            sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
           >
             <FormControl>
-              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormLabel htmlFor="name">Name</FormLabel>
               <TextField
-                error={emailError}
-                helperText={emailErrorMessage}
-                id="email"
-                type="email"
-                name="email"
-                placeholder="your@email.com"
-                autoComplete="email"
-                autoFocus
+                autoComplete="name"
+                name="name"
                 required
                 fullWidth
-                variant="outlined"
-                color={emailError ? 'error' : 'primary'}
-                sx={{ ariaLabel: 'email' }}
+                id="name"
+                placeholder="John"
+                error={nameError}
+                helperText={nameErrorMessage}
+                color={nameError ? 'error' : 'primary'}
               />
             </FormControl>
             <FormControl>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <FormLabel htmlFor="password">Password</FormLabel>
-                <Link
-                  component="button"
-                  onClick={handleClickOpen}
-                  variant="body2"
-                  sx={{ alignSelf: 'baseline' }}
-                >
-                  Forgot your password?
-                </Link>
-              </Box>
+              <FormLabel htmlFor="lastName">Last name</FormLabel>
               <TextField
-                error={passwordError}
-                helperText={passwordErrorMessage}
+                required
+                fullWidth
+                id="lastName"
+                placeholder="Snow"
+                name="lastName"
+                autoComplete="last-name"
+                error={lastNameError}
+                helperText={lastNameErrorMessage}
+                color={lastNameError ? 'error' : 'primary'}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="email">Email</FormLabel>
+              <TextField
+                required
+                fullWidth
+                id="email"
+                placeholder="your@email.com"
+                name="email"
+                autoComplete="email"
+                variant="outlined"
+                error={emailError}
+                helperText={emailErrorMessage}
+                color={passwordError ? 'error' : 'primary'}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="password">Password</FormLabel>
+              <TextField
+                required
+                fullWidth
                 name="password"
                 placeholder="••••••"
                 type="password"
                 id="password"
-                autoComplete="current-password"
-                autoFocus
-                required
-                fullWidth
+                autoComplete="new-password"
                 variant="outlined"
+                error={passwordError}
+                helperText={passwordErrorMessage}
                 color={passwordError ? 'error' : 'primary'}
               />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              control={<Checkbox value="allowExtraEmails" color="primary" />}
+              label="I want to receive updates via email."
             />
-            <ForgotPassword open={open} handleClose={handleClose} />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               onClick={validateInputs}
             >
-              Sign in
+              Sign up
             </Button>
             <Link
-              href="/material-ui/getting-started/templates/sign-up/"
+              href="/material-ui/getting-started/templates/sign-in/"
               variant="body2"
               sx={{ alignSelf: 'center' }}
             >
-              Don&apos;t have an account? Sign up
+              Already have an account? Sign in
             </Link>
           </Box>
-          <Divider>or</Divider>
+          <Divider>
+            <Typography color="text.secondary">or</Typography>
+          </Divider>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <Button
               type="submit"
               fullWidth
               variant="outlined"
               color="secondary"
-              onClick={() => alert('Sign in with Google')}
+              onClick={() => alert('Sign up with Google')}
               startIcon={<GoogleIcon />}
             >
-              Sign in with Google
+              Sign up with Google
             </Button>
             <Button
               type="submit"
               fullWidth
               variant="outlined"
               color="secondary"
-              onClick={() => alert('Sign in with Facebook')}
+              onClick={() => alert('Sign up with Facebook')}
               startIcon={<FacebookIcon />}
             >
-              Sign in with Facebook
+              Sign up with Facebook
             </Button>
           </Box>
         </Card>
@@ -222,4 +240,4 @@ const SignIn: React.FunctionComponent = () => {
   );
 }
 
-export default SignIn;
+export default SignUp;

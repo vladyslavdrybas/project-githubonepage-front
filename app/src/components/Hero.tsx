@@ -8,8 +8,8 @@ export default function Hero() {
       id="hero"
       sx={(theme) => ({
         width: '100%',
-        minHeight: '144px',
-        position: 'absolute',
+        minHeight: '89px',
+        position: 'relative',
         backgroundImage:
           theme.palette.mode === 'light'
             ? 'linear-gradient(180deg, #CEE5FD, #FFF)'
