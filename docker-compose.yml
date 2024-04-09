@@ -35,4 +35,4 @@ networks:
     external: true
   default:
     name: ${APP_NETWORK}
-    external: false
+    external: true

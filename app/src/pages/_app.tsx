@@ -1,60 +1,52 @@
-import React, {useMemo, useState} from 'react';
+import React, { useState } from 'react';
 import type { AppProps } from "next/app";
 
 import '@/styles/fonts/fonts.css';
 import '@/styles/app.css';
-import Layout from "@/_components/Layout";
 import {
   CssBaseline,
   ThemeProvider,
-  Theme,
+  createTheme,
+  PaletteMode,
 } from "@mui/material";
-import { theme as themeLight } from '@/styles/theme/light';
 import { ToastContainer } from 'react-toastify';
-import styled from 'styled-components';
-
-const LightThemeToastContainer = styled(ToastContainer)`
-      // https://styled-components.com/docs/faqs#how-can-i-override-styles-with-higher-specificity
-      &&& {
-        text-align: left;
-      }
-      .Toastify__progress-bar--error {
-        background: ${themeLight.palette.primary.main};
-      }
-      .Toastify__toast-icon svg{
-        fill: ${themeLight.palette.primary.main};
-      }
-    `;
+import getLPTheme from '@/styles/theme/getLPTheme';
+import AppAppBar from "@/components/AppAppBar";
+import Hero from "@/components/Hero";
+import Box from "@mui/material/Box";
+import Footer from "@/components/Footer";
 
 export default function App({ Component, pageProps }: AppProps) {
   // TODO add dark theme
-  const [themeMode] = useState<string>("light");
-  const theme: Theme = useMemo(
-    (): Theme => themeMode === "light" ? themeLight : themeLight,
-    [themeMode]
-  );
+  const [mode, setMode] = useState<PaletteMode>('light');
+  const LPtheme = createTheme(getLPTheme(mode));
+
+  const toggleColorMode = () => {
+    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-        <LightThemeToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-          progressClassName=""
-        />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={LPtheme}>
+      <CssBaseline />
+      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      <Hero />
+      <Box component="main" sx={{ bgcolor: 'background.default' }}>
+        <Component {...pageProps} />
+        <Footer />
+      </Box>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        progressClassName=""
+      />
+    </ThemeProvider>
   );
 }
