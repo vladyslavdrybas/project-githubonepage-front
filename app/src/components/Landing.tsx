@@ -4,6 +4,7 @@ import Divider from "@mui/material/Divider";
 import Pricing from "@/components/Pricing";
 import FAQ from "@/components/FAQ";
 import LatestProduct from "@/components/LatestProduct";
+import Testimonials from "@/components/Testimonials";
 
 const Landing: React.FunctionComponent = () => {
   return (
@@ -13,6 +14,8 @@ const Landing: React.FunctionComponent = () => {
       <Features />
       <Divider />
       <Pricing />
+      <Divider />
+      <Testimonials />
       <Divider />
       <FAQ />
       <Divider />
