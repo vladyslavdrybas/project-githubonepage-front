@@ -45,7 +45,6 @@ function getStepContent(step: number) {
 const Checkout: React.FunctionComponent = () => {
   const [activeStep, setActiveStep] = React.useState(0);
 
-
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };

@@ -11,14 +11,16 @@ import {
 } from "@mui/material";
 import { ToastContainer } from 'react-toastify';
 import getLPTheme from '@/styles/theme/getLPTheme';
-import AppAppBar from "@/components/AppAppBar";
-import Hero from "@/components/Hero";
-import Box from "@mui/material/Box";
-import Footer from "@/components/Footer";
-import Landing from "@/components/Landing";
+import Header from "@/components/Header";
+import RootLayout from "@/pages/RootLayout";
+import {NextPageWithLayout} from "@/types/pages";
 
-export default function App({ Component, pageProps }: AppProps) {
-  // TODO add dark theme
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+
   const [mode, setMode] = useState<PaletteMode>('light');
   const LPtheme = createTheme(getLPTheme(mode));
 
@@ -29,12 +31,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={LPtheme}>
       <CssBaseline />
-      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
-      <Hero />
-      <Box component="main" sx={{ bgcolor: 'background.default' }}>
+      <Header mode={mode} toggleColorMode={toggleColorMode} />
+      <RootLayout>
         <Component {...pageProps} />
-        <Footer />
-      </Box>
+      </RootLayout>
       <ToastContainer
         position="top-center"
         autoClose={5000}
