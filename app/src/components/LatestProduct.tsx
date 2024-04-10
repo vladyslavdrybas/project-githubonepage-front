@@ -17,7 +17,7 @@ const LatestProduct: React.FunctionComponent = () => {
         pb: { xs: 8, sm: 12 },
       }}
     >
-      <Stack spacing={2} useFlexGap sx={{ width: { xs: '100%', sm: '70%' } }}>
+      <Stack component={'div'} spacing={2} useFlexGap sx={{ width: { xs: '100%', sm: '70%' } }}>
         <Typography
           variant="h1"
           sx={{
