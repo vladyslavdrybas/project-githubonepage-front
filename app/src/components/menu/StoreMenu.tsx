@@ -9,6 +9,7 @@ import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 import {THeaderProps} from "@/types/pages";
 import AuthNormalMenuItem from "@/components/menu/AuthNormalMenuItem";
+import Basket from "@/components/store/Basket";
 
 const logoStyle = {
   width: '140px',
@@ -93,6 +94,8 @@ const StoreMenu: React.FunctionComponent<THeaderProps> = ({ mode, toggleColorMod
         }}
       >
         <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+        <Basket />
+
         <AuthNormalMenuItem />
       </Box>
 
@@ -124,6 +127,7 @@ const StoreMenu: React.FunctionComponent<THeaderProps> = ({ mode, toggleColorMod
               }}
             >
               <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+              <Basket />
             </Box>
             <MenuItem onClick={() => scrollToSection('highlights')}>
               Sales

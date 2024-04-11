@@ -1,8 +1,8 @@
-import React, { createContext, useState, FC, useEffect } from "react";
-import { IProducts, ProductContextState, ProductWithQty } from "@/types";
+import React, {createContext, useState, FC, useEffect, useContext} from "react";
+import { IProduct, ProductContextState, ProductWithQty } from "@/types";
 import { useRouter } from "next/router";
 import { usePrevious } from "@/hooks/usePrevious";
-
+import {toast} from "react-toastify";
 
 const contextDefaultValues: ProductContextState = {
   products: [],
@@ -16,13 +16,10 @@ const contextDefaultValues: ProductContextState = {
   totalDiscountedPrice: 0,
 };
 
-export const ProductsContext =
-  createContext<ProductContextState>(contextDefaultValues);
+const ProductsContext = createContext<ProductContextState>(contextDefaultValues);
 
-  const ProductsProvider: FC<any> = ({ children }) => {
-    const [products, setProducts] = useState<ProductWithQty[]>(
-    contextDefaultValues.products
-  );
+export const ProductsProvider: React.FunctionComponent<any> = ({ children }) => {
+  const [products, setProducts] = useState<ProductWithQty[]>(contextDefaultValues.products);
   const [totalItem, setTotalItem] = useState<number>(0);
   const [discount, setDiscount] = useState<number>(0);
   const [totalPrice, setTotalPrice] = useState<number>(0);
@@ -40,8 +37,9 @@ export const ProductsContext =
   }, [router.query.id]);
 
   //=============ADD-TO-CART====================//
-  const addProduct = (newProduct: IProducts) => {
+  const addProduct = (newProduct: IProduct) => {
     const itemExists = products.find((item) => item.id === newProduct.id);
+
     if (itemExists) {
       itemExists.qty++;
       setTotalItem(totalItem);
@@ -57,10 +55,10 @@ export const ProductsContext =
       setTotalItem(totalItem + 1);
       setTotalDiscPrice((prev) => prev + discountedPrice);
     }
+
+    toast.success(`Added ${newProduct.title}`);
     setTotalPrice((prev) => prev + parseFloat(newProduct.price));
   }
-
-
 
   //=============REMOVE FROM CART====================//
   const delProduct = (id: number) => {
@@ -129,4 +127,13 @@ export const ProductsContext =
   );
 };
 
-export default ProductsProvider;
+export const useProductsContext = () => {
+  const context = useContext(ProductsContext);
+  if (typeof context === "undefined") {
+    throw new Error(
+      'useProductsContext must be used within a "ProductsContextProvider"'
+    );
+  }
+
+  return context;
+};

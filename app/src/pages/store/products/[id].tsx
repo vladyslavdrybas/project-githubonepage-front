@@ -1,28 +1,21 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import axios from "axios";
-import { useRouter } from "next/router";
-import { ProductsContext } from "@/context/ProductsContext";
+import {useProductsContext} from "@/context/ProductsContext";
 import { IProduct } from "@/types";
 import Image from "next/image";
-import {Container} from "@mui/material";
+import {Container, Typography} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import ProductDetailsDelivery from "@/components/store/ProductDetailsDelivery";
 import Divider from "@mui/material/Divider";
 import ProductDetailsPrice from "@/components/store/Price";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Stack from "@mui/material/Stack";
 import Breadcrumbs from "@/components/store/Breadcrumbs";
 
 const ProductDetails: React.FunctionComponent<{ product: IProduct }> = ({ product }) => {
-
-  const router = useRouter();
-  const [modalOpen, setModalOpen] = useState(false);
-
-
-  const { addProduct, discount} = useContext(ProductsContext);
+  const { addProduct, discount} = useProductsContext();
 
   //TODO remove on prod
   let discounted: number = parseFloat(product.price) - parseFloat(product.price) * discount;
@@ -32,13 +25,12 @@ const ProductDetails: React.FunctionComponent<{ product: IProduct }> = ({ produc
 
   const handleAddToCart = () => {
     addProduct(product);
-    setModalOpen(true);
   };
 
   return (
     <Container id="features" sx={{ py: { xs: 2, sm: 4 } }}>
 
-      <Breadcrumbs backlink={"/store/products?sort=asc"} title={product.title.slice(0, 100)}/>
+      <Breadcrumbs backlink={"/store/products?sort=asc"} product={product}/>
 
       <Grid container spacing={1}>
 
@@ -65,8 +57,12 @@ const ProductDetails: React.FunctionComponent<{ product: IProduct }> = ({ produc
 
         <Grid item xs={12} md={6}>
 
-          <h2 className={'styles.title'}>{product.title}</h2>
-
+          <Typography
+            component={"h2"}
+            variant={"h5"}
+          >
+            {product.title}
+          </Typography>
 
           <ProductDetailsPrice
             price={ parseFloat(product.price) }
@@ -133,4 +129,5 @@ export const getStaticProps: GetStaticProps = async (context) => {
     },
   };
 };
+
 export default ProductDetails;
