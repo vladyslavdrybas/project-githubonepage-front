@@ -70,7 +70,7 @@ const ProductDetails: React.FunctionComponent<{ product: IProduct }> = ({ produc
 
           <ProductDetailsPrice
             price={ parseFloat(product.price) }
-            discount={ discounted }
+            priceWithDiscount={ discounted }
             currency={ "€" }
           />
 
