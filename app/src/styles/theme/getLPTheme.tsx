@@ -319,7 +319,7 @@ export default function getLPTheme(mode: PaletteMode): ThemeOptions {
                 background: brand[500],
                 backgroundImage: `linear-gradient(to bottom, ${brand[400]}, ${brand[600]})`,
                 boxShadow: `inset 0 1px ${alpha(brand[300], 0.4)}`,
-                outline: `1px solid ${brand[700]}`,
+                // outline: `1px solid ${brand[700]}`,
                 '&:hover': {
                   background: brand[400],
                   backgroundImage: 'none',
