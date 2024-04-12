@@ -11,9 +11,8 @@ import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import { alpha } from '@mui/material';
 
-import { GoogleIcon, FacebookIcon, SitemarkIcon } from '@/components/CustomIcons';
+import { GoogleIcon, FacebookIcon } from '@/components/CustomIcons';
 
 const SignUp: React.FunctionComponent = () => {
   const [emailError, setEmailError] = React.useState(false);

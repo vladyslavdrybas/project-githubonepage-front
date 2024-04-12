@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 
 import ForgotPassword from '@/components/ForgotPassword';
-import { GoogleIcon, FacebookIcon, SitemarkIcon } from '@/components/CustomIcons';
+import { GoogleIcon, FacebookIcon } from '@/components/CustomIcons';
 
 const SignIn: React.FunctionComponent = () => {
 

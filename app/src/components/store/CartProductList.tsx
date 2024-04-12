@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React from "react";
 import {ProductWithQty} from "@/types";
 import Grid from "@mui/material/Grid";
 import Image from "next/image";
