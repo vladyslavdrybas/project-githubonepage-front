@@ -133,7 +133,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
     divider: mode === 'dark' ? alpha(gray[600], 0.3) : alpha(gray[300], 0.5),
     background: {
       default: '#fff',
-      paper: gray[50],
+      paper: gray[100],
       ...(mode === 'dark' && { default: gray[900], paper: gray[800] }),
     },
     text: {

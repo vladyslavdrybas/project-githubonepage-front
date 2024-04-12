@@ -13,7 +13,6 @@ import Divider from "@mui/material/Divider";
 import ProductDetailsPrice from "@/components/store/Price";
 import Stack from "@mui/material/Stack";
 import Breadcrumbs from "@/components/store/Breadcrumbs";
-import {CurrencySymbols} from "@/types/CurrencySymbols";
 
 const ProductDetailsPage: React.FunctionComponent<{ product: IProduct }> = ({ product }) => {
   const { addProduct } = useProductsContext();
