@@ -10,7 +10,7 @@ const AuthNormalMenuItem: React.FunctionComponent = () => {
           color="primary"
           variant="contained"
           component="a"
-          href="/material-ui/getting-started/templates/sign-up/"
+          href="/signin"
           target="_blank"
           sx={{ width: '100%' }}
         >
@@ -22,7 +22,7 @@ const AuthNormalMenuItem: React.FunctionComponent = () => {
           color="primary"
           variant="outlined"
           component="a"
-          href="/material-ui/getting-started/templates/sign-in/"
+          href="/signup"
           target="_blank"
           sx={{ width: '100%' }}
         >

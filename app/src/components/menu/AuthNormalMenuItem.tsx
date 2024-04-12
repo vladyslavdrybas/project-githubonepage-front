@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
+import {useRouter} from "next/router";
 
 const AuthNormalMenuItem: React.FunctionComponent = () => {
   return (
@@ -9,7 +10,7 @@ const AuthNormalMenuItem: React.FunctionComponent = () => {
         variant="text"
         size="small"
         component="a"
-        href="/material-ui/getting-started/templates/sign-in/"
+        href="/signin"
         target="_blank"
       >
         Sign in
@@ -19,7 +20,7 @@ const AuthNormalMenuItem: React.FunctionComponent = () => {
         variant="contained"
         size="small"
         component="a"
-        href="/material-ui/getting-started/templates/sign-up/"
+        href="/signup"
         target="_blank"
       >
         Sign up

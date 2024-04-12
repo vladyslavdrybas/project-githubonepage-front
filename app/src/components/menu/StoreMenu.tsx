@@ -10,10 +10,11 @@ import Divider from "@mui/material/Divider";
 import {THeaderProps} from "@/types/pages";
 import AuthNormalMenuItem from "@/components/menu/AuthNormalMenuItem";
 import Basket from "@/components/store/Basket";
+import Link from "@mui/material/Link";
 
 const logoStyle = {
-  width: '140px',
-  height: 'auto',
+  width: 'auto',
+  height: '89px',
   cursor: 'pointer',
 };
 
@@ -51,36 +52,34 @@ const StoreMenu: React.FunctionComponent<THeaderProps> = ({ mode, toggleColorMod
       >
         <img
           src={
-            'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e6faf73568658154dae_SitemarkDefault.svg'
+            '/icon.png'
           }
           style={logoStyle}
-          alt="logo of sitemark"
+          alt="logo header"
         />
 
         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
           <MenuItem
-            onClick={() => scrollToSection('highlights')}
             sx={{ py: '6px', px: '12px' }}
           >
-            <Typography variant="body2" color="text.primary">
+            <Link
+              href="/store/products/sales"
+              variant="body2"
+              color="text.primary"
+            >
               Sales
-            </Typography>
+            </Link>
           </MenuItem>
           <MenuItem
-            onClick={() => scrollToSection('pricing')}
             sx={{ py: '6px', px: '12px' }}
           >
-            <Typography variant="body2" color="text.primary">
+            <Link
+              href="/store/products"
+              variant="body2"
+              color="text.primary"
+            >
               Products
-            </Typography>
-          </MenuItem>
-          <MenuItem
-            onClick={() => scrollToSection('faq')}
-            sx={{ py: '6px', px: '12px' }}
-          >
-            <Typography variant="body2" color="text.primary">
-              Orders
-            </Typography>
+            </Link>
           </MenuItem>
         </Box>
 
