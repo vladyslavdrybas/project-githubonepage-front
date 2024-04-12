@@ -30,9 +30,9 @@ function Copyright() {
 
 export default function Footer() {
   const router = useRouter();
-  const isSignUp= router.asPath === '/signup';
+  const isSignUp= router.asPath.startsWith('/signup');
   const isSignIn= router.asPath.startsWith('/signin');
-  const isHideFooter = !isSignUp || !isSignIn;
+  const isHideFooter = isSignUp || isSignIn;
 
   return (
     <Container
@@ -63,13 +63,24 @@ export default function Footer() {
         >
           <Box sx={{ width: { xs: '100%', sm: '60%' } }}>
             <Box sx={{ ml: '-15px' }}>
-              <img
-                src={
-                  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e6faf73568658154dae_SitemarkDefault.svg'
-                }
-                style={logoStyle}
-                alt="logo of sitemark"
-              />
+              <Link
+                href="/"
+                sx={{
+                  mr: 1,
+                }}
+              >
+                <img
+                  src={
+                    '/icon.png'
+                  }
+                  style={{
+                    width: 'auto',
+                    height: '89px',
+                    cursor: 'pointer',
+                  }}
+                  alt="logo header"
+                />
+              </Link>
             </Box>
             <Typography variant="body2" fontWeight={600} gutterBottom>
               Newsletter
