@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
+import ProductDetailsPrice from "@/components/store/Price";
 
 const ProductListPage: React.FunctionComponent<{ products: IProduct[] }> = ({ products }) => {
 
@@ -34,7 +35,8 @@ const ProductListPage: React.FunctionComponent<{ products: IProduct[] }> = ({ pr
           width: {
             xs: 'auto'
           },
-          flexWrap: 'wrap'
+          flexWrap: 'wrap',
+          alignItems: "baseline",
         }}
       >
 
@@ -52,17 +54,28 @@ const ProductListPage: React.FunctionComponent<{ products: IProduct[] }> = ({ pr
                 backgroundColor: 'none',
                 alignItems: 'center',
                 justifyContent: 'start',
-                py: { xs: 2, sm: 4 },
-                px: { xs: 2, sm: 4 },
-                gap: { xs: 4, md: 4 },
+                py: {xs: 2, sm: 4},
+                px: {xs: 2, sm: 4},
+                gap: {xs: 1, md: 1},
               }}
             >
-              <Image
-                src={ product.image }
-                width="144"
-                height="144"
-                alt={""}
-              />
+              {/*<Image*/}
+              {/*  src={product.image}*/}
+              {/*  width="144"*/}
+              {/*  height="144"*/}
+              {/*  alt={""}*/}
+              {/*/>*/}
+              <Box
+                sx={{
+                  maxWidth: 144,
+                }}
+              >
+                <img
+                  src={product.image}
+                  style={{width: '100%', height: 'auto'}}
+                  alt={product.title}
+                />
+              </Box>
 
               <Link
                 variant={"h5"}
@@ -74,8 +87,18 @@ const ProductListPage: React.FunctionComponent<{ products: IProduct[] }> = ({ pr
                   textAlign: 'center'
                 }}
               >
-                {product.title}
+                <Typography
+                  component={"h2"}
+                  variant={"h5"}
+                >
+                  {product.title.length > 30 ?
+                    <>{product.title.slice(0, 30)}...</>
+                    :
+                    <>{product.title}</>
+                  }
+                </Typography>
               </Link>
+              <ProductDetailsPrice product={product}/>
 
             </Grid>
           })
