@@ -5,6 +5,7 @@ import CartTotal from "@/components/store/CartTotal";
 import {Container, Typography} from "@mui/material";
 import {useProductsContext} from "@/context/ProductsContext";
 import {useRouter} from "next/router";
+import Button from "@mui/material/Button";
 
 const Cart: React.FunctionComponent = () => {
   const { totalItem, totalPrice, products} = useProductsContext();
@@ -89,12 +90,19 @@ const Cart: React.FunctionComponent = () => {
             width: '100%',
             backgroundColor: 'background.paper',
             alignItems: 'start',
-            pt: { xs: 2, sm: 4 },
+            py: { xs: 2, sm: 4 },
             px: { xs: 2, sm: 4 },
             gap: { xs: 4, md: 4 },
           }}
         >
           <CartTotal products={products}/>
+
+          <Button
+            variant="contained"
+            onClick={() => router.push('/store/checkout')}
+          >
+            Proceed checkout
+          </Button>
         </Grid>
       </Grid>
     </Container>

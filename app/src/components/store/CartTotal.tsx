@@ -6,8 +6,10 @@ import Typography from "@mui/material/Typography";
 import {ProductWithQty} from "@/types";
 import {CurrencySymbols} from "@/types/CurrencySymbols";
 import Button from "@mui/material/Button";
+import {useRouter} from "next/router";
 
 const CartTotal: React.FunctionComponent<{ products: ProductWithQty[] }> = ({ products }) => {
+  const router = useRouter();
 
   let subtotal = 0;
   let shipping = 0;
@@ -45,6 +47,8 @@ const CartTotal: React.FunctionComponent<{ products: ProductWithQty[] }> = ({ pr
               { CurrencySymbols.EURO }{subtotal.toFixed(2)}
             </Typography>
           </ListItem>
+
+        { shipping > 0 &&
           <ListItem key="cart-shipping" sx={{ py: 1, px: 0 }}>
             <ListItemText
               sx={{ mr: 2 }}
@@ -57,6 +61,9 @@ const CartTotal: React.FunctionComponent<{ products: ProductWithQty[] }> = ({ pr
               { CurrencySymbols.EURO }{shipping.toFixed(2)}
             </Typography>
           </ListItem>
+        }
+
+        { tax > 0 &&
           <ListItem key="cart-tax" sx={{ py: 1, px: 0 }}>
             <ListItemText
               sx={{ mr: 2 }}
@@ -69,6 +76,9 @@ const CartTotal: React.FunctionComponent<{ products: ProductWithQty[] }> = ({ pr
               { CurrencySymbols.EURO }{tax.toFixed(2)}
             </Typography>
           </ListItem>
+        }
+
+        { discount > 0 &&
           <ListItem key="cart-discount" sx={{ py: 1, px: 0 }}>
             <ListItemText
               sx={{ mr: 2 }}
@@ -81,6 +91,8 @@ const CartTotal: React.FunctionComponent<{ products: ProductWithQty[] }> = ({ pr
               -{ CurrencySymbols.EURO }{discount.toFixed(2)}
             </Typography>
           </ListItem>
+        }
+
           <ListItem key="cart-total" sx={{ py: 1, px: 0 }}>
             <ListItemText
               sx={{ mr: 2 }}
@@ -94,13 +106,6 @@ const CartTotal: React.FunctionComponent<{ products: ProductWithQty[] }> = ({ pr
             </Typography>
           </ListItem>
       </List>
-
-      <Button
-        variant="contained"
-        href="/store/checkout"
-      >
-        Proceed checkout
-      </Button>
     </>
   );
 }

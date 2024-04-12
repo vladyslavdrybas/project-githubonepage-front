@@ -1,9 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
-import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
@@ -16,8 +14,6 @@ import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import Review from "@/components/Review";
 import PaymentForm from "@/components/PaymentForm";
 import AddressForm from "@/components/AddressForm";
-import CheckoutInfo from "@/components/store/CheckoutInfo";
-import InfoMobile from "@/components/InfoMobile";
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
@@ -56,6 +52,10 @@ const Checkout: React.FunctionComponent = () => {
     <Grid
       container
       sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
         height: {
           xs: 'auto'
         },
@@ -67,45 +67,13 @@ const Checkout: React.FunctionComponent = () => {
       <Grid
         item
         xs={12}
-        md={6}
-        // sm={5}
-        // lg={4}
-        sx={{
-          display: { xs: 'none', md: 'flex' },
-          flexDirection: 'column',
-          // backgroundColor: 'background.paper',
-          borderRight: { sm: 'none', md: '1px solid' },
-          borderColor: { sm: 'none', md: 'divider' },
-          alignItems: 'end',
-          pt: 4,
-          px: 10,
-          gap: 4,
-        }}
-      >
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            flexGrow: 1,
-            width: '100%',
-            maxWidth: 500,
-          }}
-        >
-          <CheckoutInfo totalPrice={activeStep >= 2 ? '$144.97' : '$134.98'} />
-        </Box>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        md={6}
-        // lg={8}
         sx={{
           display: 'flex',
           flexDirection: 'column',
           maxWidth: '100%',
           width: '100%',
           backgroundColor: { xs: 'transparent', sm: 'background.default' },
-          alignItems: 'start',
+          alignItems: 'center',
           pt: { xs: 2, sm: 4 },
           px: { xs: 2, sm: 10 },
           gap: { xs: 4, md: 8 },
@@ -117,7 +85,10 @@ const Checkout: React.FunctionComponent = () => {
             justifyContent: { sm: 'space-between', md: 'flex-end' },
             alignItems: 'center',
             width: '100%',
-            maxWidth: { sm: '100%', md: 600 },
+            maxWidth: {
+              sm: '100%',
+              md: 600
+            },
           }}
         >
           <Box
@@ -127,7 +98,6 @@ const Checkout: React.FunctionComponent = () => {
               justifyContent: 'space-between',
               alignItems: 'flex-end',
               flexGrow: 1,
-              // height: 150,
             }}
           >
             <Stepper
@@ -152,39 +122,16 @@ const Checkout: React.FunctionComponent = () => {
             </Stepper>
           </Box>
         </Box>
-        <Card
-          sx={{
-            display: { xs: 'flex', md: 'none' },
-            width: '100%',
-          }}
-        >
-          <CardContent
-            sx={{
-              display: 'flex',
-              width: '100%',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              ':last-child': { pb: 2 },
-            }}
-          >
-            <div>
-              <Typography variant="subtitle2" gutterBottom>
-                Selected products
-              </Typography>
-              <Typography variant="body1">
-                {activeStep >= 2 ? '$144.97' : '$134.98'}
-              </Typography>
-            </div>
-            <InfoMobile totalPrice={activeStep >= 2 ? '$144.97' : '$134.98'} />
-          </CardContent>
-        </Card>
         <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
             flexGrow: 1,
             width: '100%',
-            maxWidth: { sm: '100%', md: 600 },
+            maxWidth: {
+              sm: '100%',
+              md: 800
+            },
             maxHeight: '720px',
             gap: { xs: 5, md: 'none' },
           }}

@@ -1,5 +1,4 @@
 import React, {useCallback} from "react";
-import Typography from "@mui/material/Typography";
 import {ProductWithQty} from "@/types";
 import Grid from "@mui/material/Grid";
 import Image from "next/image";
@@ -10,11 +9,13 @@ import Link from "@mui/material/Link";
 import ProductQuantity from "@/components/store/ProductQuantity";
 import CartProductPrice from "@/components/store/CartProductPrice";
 import {useProductsContext} from "@/context/ProductsContext";
+import {useRouter} from "next/router";
 
 const CartProductList: React.FunctionComponent<{ products: ProductWithQty[] }> = ({
   products
 }) => {
   const { delProduct } = useProductsContext();
+  const router = useRouter();
 
   return (
     <>
@@ -69,12 +70,13 @@ const CartProductList: React.FunctionComponent<{ products: ProductWithQty[] }> =
               {/*onClick ={() => router.push('/store/cart')}*/}
               <Link
                 variant={"h5"}
-                href={`/store/products/${product.id}`}
+                href="#"
                 color="text.primary"
                 underline="none"
                 sx={{
                   textAlign: { xs: "end", md: "start" },
                 }}
+                onClick={() => router.push(`/store/products/${product.id}`)}
               >
                 {product.title}
               </Link>

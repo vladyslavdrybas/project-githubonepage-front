@@ -18,7 +18,7 @@ const ProductDetailsPrice: React.FunctionComponent<{ product: IProduct }> = ({ p
         display: "flex",
         flexDirection: 'row',
         alignItems: "baseline",
-        justifyContent: { xs: "start", md: "end" },
+        justifyContent: "start",
         flexWrap: "wrap",
       }}
     >
@@ -39,6 +39,7 @@ const ProductDetailsPrice: React.FunctionComponent<{ product: IProduct }> = ({ p
           <Typography
             component={"h3"}
             variant={"body1"}
+            fontWeight="medium"
             sx={{
               ml: 1,
             }}
@@ -51,6 +52,7 @@ const ProductDetailsPrice: React.FunctionComponent<{ product: IProduct }> = ({ p
         <Typography
           component={"h3"}
           variant={"body1"}
+          fontWeight="medium"
           sx={{
             ml: 1,
           }}
