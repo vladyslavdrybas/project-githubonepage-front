@@ -54,12 +54,6 @@ const Cart: React.FunctionComponent = () => {
           >
             Cart
           </Typography>
-          <Typography
-            component={"span"}
-            variant={"caption"}
-          >
-            { totalItem } products
-          </Typography>
         </Grid>
         <Grid
           item
