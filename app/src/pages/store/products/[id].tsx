@@ -15,7 +15,7 @@ import Stack from "@mui/material/Stack";
 import Breadcrumbs from "@/components/store/Breadcrumbs";
 import {CurrencySymbols} from "@/types/CurrencySymbols";
 
-const ProductDetails: React.FunctionComponent<{ product: IProduct }> = ({ product }) => {
+const ProductDetailsPage: React.FunctionComponent<{ product: IProduct }> = ({ product }) => {
   const { addProduct } = useProductsContext();
 
   const handleAddToCart = () => {
@@ -120,4 +120,4 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export default ProductDetails;
+export default ProductDetailsPage;
