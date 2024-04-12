@@ -13,15 +13,10 @@ import Divider from "@mui/material/Divider";
 import ProductDetailsPrice from "@/components/store/Price";
 import Stack from "@mui/material/Stack";
 import Breadcrumbs from "@/components/store/Breadcrumbs";
+import {CurrencySymbols} from "@/types/CurrencySymbols";
 
 const ProductDetails: React.FunctionComponent<{ product: IProduct }> = ({ product }) => {
-  const { addProduct, discount} = useProductsContext();
-
-  //TODO remove on prod
-  let discounted: number = parseFloat(product.price) - parseFloat(product.price) * discount;
-  if (discounted === parseFloat(product.price)) {
-    discounted *= 0.9;
-  }
+  const { addProduct } = useProductsContext();
 
   const handleAddToCart = () => {
     addProduct(product);
@@ -30,9 +25,9 @@ const ProductDetails: React.FunctionComponent<{ product: IProduct }> = ({ produc
   return (
     <Container id="features" sx={{ py: { xs: 2, sm: 4 } }}>
 
-      <Breadcrumbs backlink={"/store/products?sort=asc"} product={product}/>
+      <Breadcrumbs backlink={"/store/products?sort=asc"} product={ product }/>
 
-      <Grid container spacing={1}>
+      <Grid container spacing={ 1 }>
 
         <Grid
           item
@@ -47,7 +42,7 @@ const ProductDetails: React.FunctionComponent<{ product: IProduct }> = ({ produc
           }}
         >
             <Image
-              src={product.image}
+              src={ product.image }
               width="380"
               height="380"
               objectFit="contain"
@@ -58,21 +53,17 @@ const ProductDetails: React.FunctionComponent<{ product: IProduct }> = ({ produc
         <Grid item xs={12} md={6}>
 
           <Typography
-            component={"h2"}
-            variant={"h5"}
+            component={ "h2" }
+            variant={ "h5" }
           >
             {product.title}
           </Typography>
 
-          <ProductDetailsPrice
-            price={ parseFloat(product.price) }
-            priceWithDiscount={ discounted }
-            currency={ "€" }
-          />
+          <ProductDetailsPrice product={ product } />
 
-          <Divider sx={{my: 2}} />
+          <Divider sx={{ my: 2 }} />
 
-          <Box component={"p"}>
+          <Box component={ "p" }>
             {product.description.slice(0, 300)}...
           </Box>
 
@@ -87,9 +78,9 @@ const ProductDetails: React.FunctionComponent<{ product: IProduct }> = ({ produc
             spacing={1}
           >
             <Button
-              variant={'contained'}
+              variant={ "contained" }
               component="button"
-              onClick={handleAddToCart}
+              onClick={ handleAddToCart }
             >
               Add to Cart
             </Button>

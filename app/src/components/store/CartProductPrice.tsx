@@ -1,14 +1,17 @@
 import React from "react";
 import {Typography} from "@mui/material";
-import {IProduct} from "@/types";
+import {ProductWithQty} from "@/types";
 import {CurrencySymbols} from "@/types/CurrencySymbols";
 import Box from "@mui/material/Box";
+import Chip from '@mui/material/Chip';
+import DiscountIcon from '@mui/icons-material/Discount';
 
-const ProductDetailsPrice: React.FunctionComponent<{ product: IProduct }> = ({ product }) => {
-  const price = parseFloat(product.price);
+const CartProductPrice: React.FunctionComponent<{ product: ProductWithQty }> = ({ product }) => {
+  const price = parseFloat(product.price) * product.qty;
 
   //TODO remove on prod
-  let discounted: number = price - price * 0.1;
+  const discounted: number = price - price * 0.1;
+  const saves = price - discounted
 
   const hasDiscount = discounted > 0 && price !== discounted;
 
@@ -24,17 +27,24 @@ const ProductDetailsPrice: React.FunctionComponent<{ product: IProduct }> = ({ p
     >
       { hasDiscount ? (
         <>
-          <Typography
-            component={"h3"}
-            variant={"body2"}
-            sx={{
-              textDecoration: 'line-through',
-              lineHeight: 1.5
-            }}
-          >
-            { CurrencySymbols.EURO }
-            { price.toFixed(2) }
-          </Typography>
+          <Chip
+            icon={<DiscountIcon />}
+            label={`-${ CurrencySymbols.EURO }${saves}`}
+            color="success"
+            variant="outlined"
+            size="small"
+          />
+          {/*<Typography*/}
+          {/*  component={"h3"}*/}
+          {/*  variant={"body2"}*/}
+          {/*  sx={{*/}
+          {/*    textDecoration: 'line-through',*/}
+          {/*    lineHeight: 1.5*/}
+          {/*  }}*/}
+          {/*>*/}
+          {/*  { CurrencySymbols.EURO }*/}
+          {/*  { price.toFixed(2) }*/}
+          {/*</Typography>*/}
 
           <Typography
             component={"h3"}
@@ -53,6 +63,7 @@ const ProductDetailsPrice: React.FunctionComponent<{ product: IProduct }> = ({ p
           variant={"body1"}
           sx={{
             ml: 1,
+            fontWeight: 600,
           }}
         >
           { CurrencySymbols.EURO }
@@ -63,4 +74,4 @@ const ProductDetailsPrice: React.FunctionComponent<{ product: IProduct }> = ({ p
   );
 }
 
-export default ProductDetailsPrice;
+export default CartProductPrice;

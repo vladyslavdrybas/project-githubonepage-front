@@ -93,19 +93,18 @@ export const ProductsProvider: React.FunctionComponent<any> = ({ children }) => 
   const decreaseQty = (id: number) => {
     const item = products.find((item) => item.id === id);
 
-    if (item?.qty === 1) {
-      const index = products.findIndex((item) => item.id === id);
-      products.splice(index, 1);
-      item.qty = 0;
-      setTotalItem(totalItem - 1);
-    } else {
-      if (item) {
+
+    if (item) {
+      if (item.qty <= 1) {
+        item.qty = 1;
+      } else {
         item.qty--;
       }
       setTotalPrice((prev) => prev - parseFloat(item?.price!));
       setTotalDiscPrice((prev) => prev - item?.discountedPrice!);
       return item?.qty;
     }
+
   };
 
   return (

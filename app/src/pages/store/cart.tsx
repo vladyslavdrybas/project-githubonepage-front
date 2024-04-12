@@ -4,9 +4,11 @@ import CartProductList from "@/components/store/CartProductList";
 import CartTotal from "@/components/store/CartTotal";
 import {Container, Typography} from "@mui/material";
 import {useProductsContext} from "@/context/ProductsContext";
+import {useRouter} from "next/router";
 
 const Cart: React.FunctionComponent = () => {
-  const { totalItem, totalPrice} = useProductsContext();
+  const { totalItem, totalPrice, products} = useProductsContext();
+  const router = useRouter();
 
   return (
     <Container
@@ -74,7 +76,7 @@ const Cart: React.FunctionComponent = () => {
             gap: { xs: 4, md: 4 },
           }}
         >
-          <CartProductList />
+          <CartProductList products={products}/>
         </Grid>
         <Grid
           item
@@ -92,7 +94,7 @@ const Cart: React.FunctionComponent = () => {
             gap: { xs: 4, md: 4 },
           }}
         >
-          <CartTotal />
+          <CartTotal products={products}/>
         </Grid>
       </Grid>
     </Container>

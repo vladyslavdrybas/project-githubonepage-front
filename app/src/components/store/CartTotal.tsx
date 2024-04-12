@@ -1,17 +1,27 @@
 import React from "react";
-import Stack from "@mui/material/Stack";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
+import {ProductWithQty} from "@/types";
 
-const CartTotal: React.FunctionComponent<any> = () => {
+const CartTotal: React.FunctionComponent<{ products: ProductWithQty[] }> = ({ products }) => {
 
   return (
-    <Stack
-      direction="row"
-      justifyContent="flex-start"
-      alignItems="center"
-      spacing={1}
-    >
-      Total and Proceed to checkout
-    </Stack>
+    <List disablePadding>
+      {products.map((product) => (
+        <ListItem key={product.id} sx={{ py: 1, px: 0 }}>
+          <ListItemText
+            sx={{ mr: 2 }}
+            primary={product.title}
+            secondary={product.description}
+          />
+          <Typography variant="body1" fontWeight="medium">
+            {product.price}
+          </Typography>
+        </ListItem>
+      ))}
+    </List>
   );
 }
 
