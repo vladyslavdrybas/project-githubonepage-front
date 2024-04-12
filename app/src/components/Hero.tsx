@@ -8,7 +8,7 @@ export default function Hero() {
       id="hero"
       sx={(theme) => ({
         width: '100%',
-        minHeight: '89px',
+        height: '100%',
         position: 'relative',
         backgroundImage:
           theme.palette.mode === 'light'

@@ -7,17 +7,20 @@ import {THeaderProps} from "@/types/pages";
 import LandingPageMenu from "@/components/menu/LandingPageMenu";
 import StoreMenu from "@/components/menu/StoreMenu";
 import { useRouter } from "next/router";
+import Box from "@mui/material/Box";
 
 function Header({ mode, toggleColorMode }: THeaderProps) {
   const router = useRouter();
   const isHome= router.asPath === '/';
   const isStore= router.asPath.startsWith('/store');
+  const isHideHeader = !isHome && !isStore;
 
   return (
     <>
       <AppBar
         position="fixed"
         sx={{
+          display: isHideHeader ? 'none' : 'flex',
           boxShadow: 0,
           bgcolor: 'transparent',
           backgroundImage: 'none',
@@ -54,7 +57,15 @@ function Header({ mode, toggleColorMode }: THeaderProps) {
           </Toolbar>
         </Container>
       </AppBar>
-      <Hero />
+      <Box
+        sx={{
+          display: isHideHeader ? 'none' : 'flex',
+          height: '89px',
+          width: '100%',
+        }}
+      >
+        <Hero />
+      </Box>
     </>
   );
 }

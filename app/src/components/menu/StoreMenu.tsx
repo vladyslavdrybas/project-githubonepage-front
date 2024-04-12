@@ -1,7 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
-import Typography from "@mui/material/Typography";
 import ToggleColorMode from "@/components/ToggleColorMode";
 import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -50,26 +49,23 @@ const StoreMenu: React.FunctionComponent<THeaderProps> = ({ mode, toggleColorMod
           px: 0,
         }}
       >
-        <img
-          src={
-            '/icon.png'
-          }
-          style={logoStyle}
-          alt="logo header"
-        />
+        <Link
+          href="/"
+          sx={{
+            mr: 1,
+          }}
+        >
+          <img
+            src={
+              '/icon.png'
+            }
+            style={logoStyle}
+            alt="logo header"
+          />
+        </Link>
 
         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <MenuItem
-            sx={{ py: '6px', px: '12px' }}
-          >
-            <Link
-              href="/store/products/sales"
-              variant="body2"
-              color="text.primary"
-            >
-              Sales
-            </Link>
-          </MenuItem>
+
           <MenuItem
             sx={{ py: '6px', px: '12px' }}
           >
@@ -81,8 +77,20 @@ const StoreMenu: React.FunctionComponent<THeaderProps> = ({ mode, toggleColorMod
               Products
             </Link>
           </MenuItem>
-        </Box>
 
+          <MenuItem
+            sx={{ py: '6px', px: '12px' }}
+          >
+            <Link
+              href="/store/products/sales"
+              variant="body2"
+              color="text.primary"
+            >
+              Sales
+            </Link>
+          </MenuItem>
+
+        </Box>
       </Box>
 
       <Box
@@ -120,22 +128,32 @@ const StoreMenu: React.FunctionComponent<THeaderProps> = ({ mode, toggleColorMod
             <Box
               sx={{
                 display: 'flex',
-                flexDirection: 'column',
+                flexDirection: 'row',
                 alignItems: 'end',
+                justifyContent: 'end',
                 flexGrow: 1,
               }}
             >
               <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
               <Basket />
             </Box>
-            <MenuItem onClick={() => scrollToSection('highlights')}>
-              Sales
+            <MenuItem>
+              <Link
+                href="/store/products"
+                variant="body2"
+                color="text.primary"
+              >
+                Products
+              </Link>
             </MenuItem>
-            <MenuItem onClick={() => scrollToSection('pricing')}>
-              Products
-            </MenuItem>
-            <MenuItem onClick={() => scrollToSection('faq')}>
-              Orders
+            <MenuItem>
+              <Link
+                href="/store/products/sales"
+                variant="body2"
+                color="text.primary"
+              >
+                Sales
+              </Link>
             </MenuItem>
             <Divider />
             <AuthNormalMenuItem />

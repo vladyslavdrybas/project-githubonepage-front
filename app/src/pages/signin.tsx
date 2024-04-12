@@ -11,7 +11,6 @@ import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import { alpha } from '@mui/material';
 
 import ForgotPassword from '@/components/ForgotPassword';
 import { GoogleIcon, FacebookIcon, SitemarkIcon } from '@/components/CustomIcons';
@@ -103,14 +102,47 @@ const SignIn: React.FunctionComponent = () => {
                 : 'rgba(0, 0, 0, 0.5) 0px 5px 15px 0px, rgba(25, 28, 33, 0.08) 0px 15px 35px -5px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px',
           })}
         >
-          <SitemarkIcon sx={{ width: 100 }} />
-          <Typography
-            component="h1"
-            variant="h4"
-            sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+            }}
           >
-            Sign in
-          </Typography>
+            <Link
+              href="/"
+              sx={{
+                mr: 1,
+              }}
+            >
+              <img
+                src={
+                  '/icon.png'
+                }
+                style={{
+                  width: 'auto',
+                  height: '89px',
+                  cursor: 'pointer',
+                }}
+                alt="logo header"
+              />
+            </Link>
+
+            <Typography
+              component="h1"
+              variant="h4"
+              sx={{
+                width: '100%',
+                fontSize: 'clamp(2rem, 10vw, 2.15rem)',
+                textAlign: 'center'
+            }}
+            >
+              Sign in
+            </Typography>
+          </Box>
+
           <Box
             component="form"
             onSubmit={handleSubmit}
@@ -186,7 +218,7 @@ const SignIn: React.FunctionComponent = () => {
               Sign in
             </Button>
             <Link
-              href="/material-ui/getting-started/templates/sign-up/"
+              href="/signup"
               variant="body2"
               sx={{ alignSelf: 'center' }}
             >
