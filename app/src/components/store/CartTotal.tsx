@@ -5,12 +5,8 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import {ProductWithQty} from "@/types";
 import {CurrencySymbols} from "@/types/CurrencySymbols";
-import Button from "@mui/material/Button";
-import {useRouter} from "next/router";
 
 const CartTotal: React.FunctionComponent<{ products: ProductWithQty[] }> = ({ products }) => {
-  const router = useRouter();
-
   let subtotal = 0;
   let shipping = 0;
   let discount = 0;
