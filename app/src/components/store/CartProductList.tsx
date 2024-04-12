@@ -44,7 +44,6 @@ const CartProductList: React.FunctionComponent<{ products: ProductWithQty[] }> =
               >
                 <Image
                   src={product.image}
-                  objectFit="contain"
                   width="89"
                   height="89"
 
@@ -112,7 +111,6 @@ const CartProductList: React.FunctionComponent<{ products: ProductWithQty[] }> =
               >
                 <Image
                   src={product.image}
-                  objectFit="contain"
                   width="89"
                   height="89"
                   alt={""}

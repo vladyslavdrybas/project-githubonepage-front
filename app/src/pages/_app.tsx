@@ -22,6 +22,25 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
 
+const LightThemeToastContainer = styled(ToastContainer)(({ theme }) => ({
+  textAlign: 'left',
+  '& .Toastify__toast': {
+    backgroundColor: theme.palette.background.paper,
+  },
+  '& .Toastify__toast-icon svg': {
+    fill: theme.palette.primary,
+  },
+  '& .Toastify__progress-bar--success': {
+    background: theme.palette.success,
+  },
+  '& .Toastify__progress-bar--info': {
+    background: theme.palette.primary,
+  },
+  '& .Toastify__progress-bar--error': {
+    background: theme.palette.error,
+  },
+}));
+
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   const [mode, setMode] = useState<PaletteMode>('light');
@@ -30,25 +49,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
-
-  const LightThemeToastContainer = styled(ToastContainer)`
-      // https://styled-components.com/docs/faqs#how-can-i-override-styles-with-higher-specificity
-      &&& {
-        text-align: left;
-      }
-      .Toastify__progress-bar--error {
-        background: ${LPtheme.palette.error.main};
-      }
-      .Toastify__progress-bar--info {
-        background: ${LPtheme.palette.primary.main};
-      }
-      .Toastify__progress-bar--success {
-        background: ${LPtheme.palette.success.main};
-      }
-      .Toastify__toast-icon svg{
-        fill: ${LPtheme.palette.primary.main};
-      }
-    `;
 
   return (
     <ThemeProvider theme={LPtheme}>
@@ -62,7 +62,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme={mode}
+        theme={LPtheme}
         progressClassName=""
       />
       <CssBaseline />

@@ -45,7 +45,6 @@ const ProductDetails: React.FunctionComponent<{ product: IProduct }> = ({ produc
               src={ product.image }
               width="380"
               height="380"
-              objectFit="contain"
               alt={""}
             />
         </Grid>
