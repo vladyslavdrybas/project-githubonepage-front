@@ -4,7 +4,6 @@ import {ProductWithQty} from "@/types";
 import Box from "@mui/material/Box";
 import {useProductsContext} from "@/context/ProductsContext";
 import Button from "@mui/material/Button";
-import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 

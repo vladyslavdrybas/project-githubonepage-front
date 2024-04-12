@@ -49,25 +49,24 @@ const CartProductPrice: React.FunctionComponent<{ product: ProductWithQty }> = (
           <Typography
             component={"h3"}
             variant={"body1"}
+            fontWeight="medium"
             sx={{
               ml: 1,
             }}
           >
-            { CurrencySymbols.EURO }
-            { discounted.toFixed(2) }
+            { CurrencySymbols.EURO }{ discounted.toFixed(2) }
           </Typography>
         </>
       ) : (
         <Typography
           component={"h3"}
           variant={"body1"}
+          fontWeight="medium"
           sx={{
             ml: 1,
-            fontWeight: 600,
           }}
         >
-          { CurrencySymbols.EURO }
-          { price.toFixed(2) }
+          { CurrencySymbols.EURO }{ price.toFixed(2) }
         </Typography>
       ) }
     </Box>

@@ -16,6 +16,8 @@ export type ProductWithQty = {
   image: string;
   qty: number;
   discountedPrice: number;
+  shippingPrice?: number;
+  tax?: number;
 };
 
 export type ProductContextState = {
