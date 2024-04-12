@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import FacebookIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/X';
+import {useRouter} from "next/router";
 
 const logoStyle = {
   width: '140px',
@@ -28,10 +29,15 @@ function Copyright() {
 }
 
 export default function Footer() {
+  const router = useRouter();
+  const isSignUp= router.asPath === '/signup';
+  const isSignIn= router.asPath.startsWith('/signin');
+  const isHideFooter = !isSignUp || !isSignIn;
+
   return (
     <Container
       sx={{
-        display: 'flex',
+        display: isHideFooter ? 'none' : 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         gap: { xs: 4, sm: 8 },
