@@ -10,14 +10,13 @@ import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
 
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 
 import Review from "@/components/Review";
 import PaymentForm from "@/components/PaymentForm";
 import AddressForm from "@/components/AddressForm";
-import Info from "@/components/Info";
+import CheckoutInfo from "@/components/store/CheckoutInfo";
 import InfoMobile from "@/components/InfoMobile";
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
@@ -92,7 +91,7 @@ const Checkout: React.FunctionComponent = () => {
             maxWidth: 500,
           }}
         >
-          <Info totalPrice={activeStep >= 2 ? '$144.97' : '$134.98'} />
+          <CheckoutInfo totalPrice={activeStep >= 2 ? '$144.97' : '$134.98'} />
         </Box>
       </Grid>
       <Grid

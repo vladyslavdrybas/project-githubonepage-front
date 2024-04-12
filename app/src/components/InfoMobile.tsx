@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
-import Info from './Info';
+import CheckoutInfo from './store/CheckoutInfo';
 
 interface InfoProps {
   totalPrice: string;
@@ -29,7 +29,7 @@ export default function InfoMobile({ totalPrice }: InfoProps) {
       >
         <CloseIcon />
       </IconButton>
-      <Info totalPrice={totalPrice} />
+      <CheckoutInfo totalPrice={totalPrice} />
     </Box>
   );
 

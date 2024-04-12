@@ -4,6 +4,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
 
 const products = [
   {
@@ -32,9 +33,9 @@ interface InfoProps {
   totalPrice: string;
 }
 
-export default function Info({ totalPrice }: InfoProps) {
+export default function CheckoutInfo({ totalPrice }: InfoProps) {
   return (
-    <React.Fragment>
+    <Box>
       <Typography variant="subtitle2" color="text.secondary">
         Total
       </Typography>
@@ -55,6 +56,6 @@ export default function Info({ totalPrice }: InfoProps) {
           </ListItem>
         ))}
       </List>
-    </React.Fragment>
+    </Box>
   );
 }

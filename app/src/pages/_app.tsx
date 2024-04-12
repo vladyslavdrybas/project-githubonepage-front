@@ -22,8 +22,6 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
 
-
-
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   const [mode, setMode] = useState<PaletteMode>('light');
