@@ -78,7 +78,7 @@ const CartTotal: React.FunctionComponent<{ products: ProductWithQty[] }> = ({ pr
               variant="body1"
               fontWeight="medium"
             >
-              { CurrencySymbols.EURO }{discount.toFixed(2)}
+              -{ CurrencySymbols.EURO }{discount.toFixed(2)}
             </Typography>
           </ListItem>
           <ListItem key="cart-total" sx={{ py: 1, px: 0 }}>
