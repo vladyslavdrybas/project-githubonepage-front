@@ -10,7 +10,6 @@ const Newsletter: React.FunctionComponent = () => {
       container
       spacing={ 1 }
       sx={{
-        mt: { xs: 2, sm: 4 },
         p: { xs: 2, sm: 4 },
       }}
     >
