@@ -68,7 +68,7 @@ const Newslatter: React.FunctionComponent = () => {
           placeholder="Your first name"
           inputProps={{
             autoComplete: 'off',
-            ariaLabel: 'Your first name',
+            'aria-label': 'Your first name',
           }}
         />
 
