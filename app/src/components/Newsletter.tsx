@@ -12,7 +12,6 @@ const Newsletter: React.FunctionComponent = () => {
       sx={{
         mt: { xs: 2, sm: 4 },
         p: { xs: 2, sm: 4 },
-        backgroundColor: "background.paper",
       }}
     >
       <Grid
