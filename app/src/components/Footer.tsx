@@ -9,7 +9,7 @@ import FacebookIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/X';
 import {useRouter} from "next/router";
-import Newslatter from "@/components/Newslatter";
+import Newsletter from "@/components/Newsletter";
 import Divider from "@mui/material/Divider";
 import {alpha} from "@mui/material";
 
@@ -41,7 +41,7 @@ export default function Footer() {
         flexDirection: 'column',
       }}
     >
-      <Newslatter />
+      <Newsletter />
 
       <Container
         sx={{

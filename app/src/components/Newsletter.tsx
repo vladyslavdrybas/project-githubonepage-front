@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 
-const Newslatter: React.FunctionComponent = () => {
+const Newsletter: React.FunctionComponent = () => {
   return (
     <Grid
       container
@@ -101,4 +101,4 @@ const Newslatter: React.FunctionComponent = () => {
   );
 }
 
-export default Newslatter;
+export default Newsletter;
