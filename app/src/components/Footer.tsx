@@ -51,6 +51,10 @@ export default function Footer() {
           gap: { xs: 4, sm: 8 },
           py: { xs: 5, sm: 8 },
           textAlign: { sm: 'center', md: 'left' },
+          backgroundColor: "background.paper",
+          minWidth: "100%",
+          maxWidth: "100%",
+          mx: 0,
         }}
       >
 
@@ -59,7 +63,7 @@ export default function Footer() {
             display: 'flex',
             flexDirection: { xs: 'column', sm: 'row' },
             width: '100%',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
           }}
         >
 

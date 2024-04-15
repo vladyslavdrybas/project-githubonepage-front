@@ -1,5 +1,5 @@
 import React from "react";
-import {alpha, Typography} from "@mui/material";
+import { Typography} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -10,7 +10,7 @@ const Newslatter: React.FunctionComponent = () => {
       container
       spacing={ 1 }
       sx={{
-        my: { xs: 2, sm: 4 },
+        mt: { xs: 2, sm: 4 },
         p: { xs: 2, sm: 4 },
         backgroundColor: "background.paper",
       }}
