@@ -1,6 +1,6 @@
 services:
   web:
-    container_name: ${PROJECT_NAME:-solo}-${SERVICE_NAME:-service}-api-${API_VERSION:-1.0}-web-${APP_ENV:-none}
+    container_name: ${PROJECT_NAME:-solo}-${SERVICE_NAME:-service}-api-${API_VERSION:-1.0}-spa-${APP_ENV:-none}
     image: vd_${PROJECT_NAME:-solo}_${SERVICE_NAME:-service}_spa_${APP_ENV:-none}:${API_VERSION:-1.0}
     build:
       context: .
@@ -16,8 +16,8 @@ services:
       - default
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${PROJECT_NAME}-${SERVICE_NAME}-http.rule=Host(`${HOST}`) && PathPrefix(`${NEXT_PUBLIC_URL}`)"
-      - "traefik.http.routers.${PROJECT_NAME}-${SERVICE_NAME}-https.rule=Host(`${HOST}`) && PathPrefix(`${NEXT_PUBLIC_URL}`)"
+      - "traefik.http.routers.${PROJECT_NAME}-${SERVICE_NAME}-http.rule=Host(`${HOST}`)"
+      - "traefik.http.routers.${PROJECT_NAME}-${SERVICE_NAME}-https.rule=Host(`${HOST}`)"
       - "traefik.http.routers.${PROJECT_NAME}-${SERVICE_NAME}-https.tls.domains[0].main=${HOST}"
       - "traefik.http.routers.${PROJECT_NAME}-${SERVICE_NAME}-http.entrypoints=web"
       - "traefik.http.middlewares.${PROJECT_NAME}-${SERVICE_NAME}-https.redirectscheme.scheme=https"
