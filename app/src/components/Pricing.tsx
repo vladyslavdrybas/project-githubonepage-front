@@ -104,7 +104,7 @@ export default function Pricing() {
                   tier.title === 'Professional' ? 'primary.main' : undefined,
                 background:
                   tier.title === 'Professional'
-                    ? 'linear-gradient(#033363, #021F3B)'
+                    ? (theme) => `linear-gradient(${theme.palette.primary.main}, ${theme.palette.primary.dark})`
                     : undefined,
               }}
             >
