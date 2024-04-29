@@ -242,31 +242,6 @@ const SignUp: React.FunctionComponent = () => {
               Already have an account? Sign in
             </Link>
           </Box>
-          <Divider>
-            <Typography color="text.secondary">or</Typography>
-          </Divider>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <Button
-              type="submit"
-              fullWidth
-              variant="outlined"
-              color="secondary"
-              onClick={() => alert('Sign up with Google')}
-              startIcon={<GoogleIcon />}
-            >
-              Sign up with Google
-            </Button>
-            <Button
-              type="submit"
-              fullWidth
-              variant="outlined"
-              color="secondary"
-              onClick={() => alert('Sign up with Facebook')}
-              startIcon={<FacebookIcon />}
-            >
-              Sign up with Facebook
-            </Button>
-          </Box>
         </Card>
       </Stack>
     </Stack>

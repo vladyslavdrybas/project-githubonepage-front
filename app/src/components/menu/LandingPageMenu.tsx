@@ -13,7 +13,7 @@ import Link from "@mui/material/Link";
 
 const logoStyle = {
   width: 'auto',
-  height: '89px',
+  height: '55px',
   cursor: 'pointer',
 };
 
@@ -45,7 +45,6 @@ const LandingPageMenu: React.FunctionComponent<THeaderProps> = ({ mode, toggleCo
           flexGrow: 1,
           display: 'flex',
           alignItems: 'center',
-          ml: '-18px',
           px: 0,
         }}
       >
