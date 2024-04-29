@@ -2,9 +2,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Divider from '@mui/material/Divider';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import Link from '@mui/material/Link';
@@ -13,7 +10,8 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 
 import ForgotPassword from '@/components/ForgotPassword';
-import { GoogleIcon, FacebookIcon } from '@/components/CustomIcons';
+import ApiAdapter from "@/api/ApiAdapter";
+import {toast} from "react-toastify";
 
 const SignIn: React.FunctionComponent = () => {
 
@@ -32,13 +30,25 @@ const SignIn: React.FunctionComponent = () => {
     setOpen(false);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    try {
+      const r = await ApiAdapter.getInstance().request('login', {email: data.get('email'), password: data.get('password')});
+      console.log(r);
+    } catch (e: any) {
+      console.log(e);
+      if ('message' in e) {
+        toast.error(e.message);
+      } else {
+        toast.error('Unknown error type');
+      }
+    }
   };
 
   const validateInputs = () => {
