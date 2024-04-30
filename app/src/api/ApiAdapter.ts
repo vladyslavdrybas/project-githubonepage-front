@@ -18,15 +18,24 @@ export enum ApiRoutes {
 
 interface IApiResponseError {
   status: number;
-  routeName: string;
-  route: string;
-  data: object|Array<any>;
   message: string;
+  metadata: {
+    routeName: string;
+    route: string;
+    requestData: object|Array<any>;
+  };
 }
 
 type TLoginAction = {
   email: string;
   password: string;
+}
+
+type TRegisterAction = {
+  email: string;
+  password: string;
+  newsletter: boolean;
+  termsConditions: boolean;
 }
 
 export class ApiAdapter {
@@ -52,17 +61,19 @@ export class ApiAdapter {
     try {
       return await this[actionName as Exclude<keyof ApiAdapter, "routes"|"request"|"baseUrl">](params as any);
     } catch (e: any) {
-      console.log(e.toJSON());
-      e = e.toJSON();
+      console.log(e.response);
 
-      console.log(e.stack);
+      const error = e.response;
+      const status = e.toJSON().status ?? error.status;
 
       throw {
-        status: e.status,
-        routeName: routeName,
-        route: this.routes[routeName as keyof typeof ApiRoutes],
-        data: params,
-        message: e.message,
+        status: status,
+        message: error.data?.message ?? 'Request with status code ' + status,
+        metadata: {
+          routeName: routeName,
+          route: this.routes[routeName as keyof typeof ApiRoutes],
+          requestData: params,
+        }
       } as IApiResponseError;
     }
   }
@@ -78,6 +89,32 @@ export class ApiAdapter {
     this._accountStorage.exp = exp;
 
     this._accountStorage.store();
+  }
+
+  protected async send(params: any) {
+
+  }
+
+  async registerAction (params: TRegisterAction): Promise<IApiResponse> {
+    const {status} = await axios({
+      url: this.routes.register,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      data: {
+        email: params.email,
+        password: params.password,
+        newsletter: params.newsletter,
+        termsConditions: params.termsConditions,
+      }
+    });
+
+    return {
+      status: status,
+      data: [],
+    };
   }
 
   async loginAction (params: TLoginAction): Promise<IApiResponse> {

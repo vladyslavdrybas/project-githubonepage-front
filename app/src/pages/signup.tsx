@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 
 import { GoogleIcon, FacebookIcon } from '@/components/CustomIcons';
+import ApiAdapter from "@/api/ApiAdapter";
+import {toast} from "react-toastify";
 
 const SignUp: React.FunctionComponent = () => {
   const [emailError, setEmailError] = React.useState(false);
@@ -27,8 +29,6 @@ const SignUp: React.FunctionComponent = () => {
   const validateInputs = () => {
     const email = document.getElementById('email') as HTMLInputElement;
     const password = document.getElementById('password') as HTMLInputElement;
-    const name = document.getElementById('name') as HTMLInputElement;
-    const lastName = document.getElementById('lastName') as HTMLInputElement;
 
     let isValid = true;
 
@@ -50,36 +50,28 @@ const SignUp: React.FunctionComponent = () => {
       setPasswordErrorMessage('');
     }
 
-    if (!name.value || name.value.length < 1) {
-      setNameError(true);
-      setNameErrorMessage('Name is required.');
-      isValid = false;
-    } else {
-      setNameError(false);
-      setNameErrorMessage('');
-    }
-
-    if (!lastName.value || lastName.value.length < 1) {
-      setLastNameError(true);
-      setLastNameErrorMessage('Name is required.');
-      isValid = false;
-    } else {
-      setLastNameError(false);
-      setLastNameErrorMessage('');
-    }
-
     return isValid;
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      name: data.get('name'),
-      lastName: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    try {
+      const r = await ApiAdapter.getInstance().request('register', {
+        email: data.get('email'),
+        password: data.get('password'),
+        newsletter: data.has('newsletter'),
+        termsConditions: data.has('termsConditions'),
+      });
+    } catch (e: any) {
+      console.log(e);
+      if ('message' in e) {
+        toast.error(e.message);
+      } else {
+        toast.error('Unknown error type');
+      }
+    }
   };
 
   return (
@@ -164,34 +156,6 @@ const SignUp: React.FunctionComponent = () => {
             sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
           >
             <FormControl>
-              <FormLabel htmlFor="name">Name</FormLabel>
-              <TextField
-                autoComplete="name"
-                name="name"
-                required
-                fullWidth
-                id="name"
-                placeholder="John"
-                error={nameError}
-                helperText={nameErrorMessage}
-                color={nameError ? 'error' : 'primary'}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel htmlFor="lastName">Last name</FormLabel>
-              <TextField
-                required
-                fullWidth
-                id="lastName"
-                placeholder="Snow"
-                name="lastName"
-                autoComplete="last-name"
-                error={lastNameError}
-                helperText={lastNameErrorMessage}
-                color={lastNameError ? 'error' : 'primary'}
-              />
-            </FormControl>
-            <FormControl>
               <FormLabel htmlFor="email">Email</FormLabel>
               <TextField
                 required
@@ -223,8 +187,13 @@ const SignUp: React.FunctionComponent = () => {
               />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox value="allowExtraEmails" color="primary" />}
+              control={<Checkbox id="newsletter" name="newsletter" value="yes" color="primary" />}
               label="I want to receive updates via email."
+            />
+            <FormControlLabel
+              control={<Checkbox id="termsConditions" name="termsConditions" value="yes" color="primary" />}
+              label="I agree with terms and conditions."
+              required
             />
             <Button
               type="submit"
