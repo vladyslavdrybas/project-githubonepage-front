@@ -97,6 +97,25 @@ export class ApiAdapter {
       data: this._accountStorage.account,
     };
   }
+
+  async logoutAction (params: TLoginAction): Promise<IApiResponse> {
+    const {status} = await axios({
+      url: this.routes.logout,
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': 'Bearer ' + this._accountStorage.accessToken,
+      }
+    });
+
+    this._accountStorage.logout();
+
+    return {
+      status: status,
+      data: this._accountStorage.account,
+    };
+  }
 }
 
 export default ApiAdapter;
