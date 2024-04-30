@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Divider from '@mui/material/Divider';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import Link from '@mui/material/Link';
@@ -12,19 +11,16 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 
-import { GoogleIcon, FacebookIcon } from '@/components/CustomIcons';
 import ApiAdapter from "@/api/ApiAdapter";
 import {toast} from "react-toastify";
+import {useRouter} from "next/router";
 
 const SignUp: React.FunctionComponent = () => {
+  const router = useRouter();
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
-  const [nameError, setNameError] = React.useState(false);
-  const [nameErrorMessage, setNameErrorMessage] = React.useState('');
-  const [lastNameError, setLastNameError] = React.useState(false);
-  const [lastNameErrorMessage, setLastNameErrorMessage] = React.useState('');
 
   const validateInputs = () => {
     const email = document.getElementById('email') as HTMLInputElement;
@@ -64,6 +60,7 @@ const SignUp: React.FunctionComponent = () => {
         newsletter: data.has('newsletter'),
         termsConditions: data.has('termsConditions'),
       });
+      await router.push('/');
     } catch (e: any) {
       console.log(e);
       if ('message' in e) {

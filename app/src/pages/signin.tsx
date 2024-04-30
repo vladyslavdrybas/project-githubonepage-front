@@ -12,9 +12,10 @@ import Stack from '@mui/material/Stack';
 import ForgotPassword from '@/components/ForgotPassword';
 import ApiAdapter from "@/api/ApiAdapter";
 import {toast} from "react-toastify";
+import {useRouter} from "next/router";
 
 const SignIn: React.FunctionComponent = () => {
-
+  const router = useRouter();
 
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
@@ -40,7 +41,7 @@ const SignIn: React.FunctionComponent = () => {
 
     try {
       const r = await ApiAdapter.getInstance().request('login', {email: data.get('email'), password: data.get('password')});
-      console.log(r);
+      await router.push('/');
     } catch (e: any) {
       console.log(e);
       if ('message' in e) {
