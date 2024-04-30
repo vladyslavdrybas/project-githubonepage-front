@@ -60,7 +60,7 @@ const SignUp: React.FunctionComponent = () => {
         newsletter: data.has('newsletter'),
         termsConditions: data.has('termsConditions'),
       });
-      await router.push('/');
+      await router.push('/signin');
     } catch (e: any) {
       console.log(e);
       if ('message' in e) {
