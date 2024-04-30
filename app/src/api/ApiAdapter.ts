@@ -67,6 +67,19 @@ export class ApiAdapter {
     }
   }
 
+  protected storeAccountFromToken (data: any) {
+    this._accountStorage.accessToken = data.token;
+    this._accountStorage.refreshToken = data.refresh_token;
+
+    let {id, username, iat, exp} = jwt_decode(data.token);
+    this._accountStorage.id = id;
+    this._accountStorage.username = username;
+    this._accountStorage.iat = iat;
+    this._accountStorage.exp = exp;
+
+    this._accountStorage.store();
+  }
+
   async loginAction (params: TLoginAction): Promise<IApiResponse> {
     const {data, status} = await axios({
       url: this.routes.login,
@@ -81,16 +94,28 @@ export class ApiAdapter {
       }
     });
 
-    this._accountStorage.accessToken = data.token;
-    this._accountStorage.refreshToken = data.refresh_token;
+    this.storeAccountFromToken(data);
 
-    let {id, username, iat, exp} = jwt_decode(data.token);
-    this._accountStorage.id = id;
-    this._accountStorage.username = username;
-    this._accountStorage.iat = iat;
-    this._accountStorage.exp = exp;
+    return {
+      status: status,
+      data: this._accountStorage.account,
+    };
+  }
 
-    this._accountStorage.store();
+  async accessTokenRefreshAction (params: any): Promise<IApiResponse> {
+    const {data, status} = await axios({
+      url: this.routes.accessTokenRefresh,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      data: {
+        refreshToken: params.refreshToken,
+      }
+    });
+
+    this.storeAccountFromToken(data);
 
     return {
       status: status,
