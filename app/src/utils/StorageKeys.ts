@@ -29,6 +29,11 @@ export class AccountLocalStorage {
     localStorage.setItem('account', JSON.stringify(this._account));
   }
 
+  logout = () => {
+    this.account = {};
+    localStorage.removeItem('account');
+  }
+
   get account(): IAccountRecord {
     if (!this._account) {
       this._account = this.getAccountFromLocalStorage();
@@ -39,7 +44,6 @@ export class AccountLocalStorage {
 
   set account(acc: IAccountRecord) {
     this._account = acc;
-    this.store();
   }
 
   get accessToken(): string|null {
